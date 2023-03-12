@@ -41,7 +41,7 @@ namespace Kursovaya
             
             MySqlDataAdapter adapter = new MySqlDataAdapter();// адаптер
 
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @uL AND `password`=@uP",db.GetConnection());// запрос
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `accounts` WHERE `Login` = @uL AND `Password`=@uP", db.GetConnection());// запрос
 
             command.Parameters.Add("@uL", MySqlDbType.VarChar).Value = loginuser;// определение маски
             command.Parameters.Add("@uP", MySqlDbType.VarChar).Value = passuser;// определение маски

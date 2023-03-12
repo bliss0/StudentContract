@@ -18,7 +18,7 @@ namespace Kursovaya
         public MainForm()
         {
             InitializeComponent();
-            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=itproger");
+            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
 
             try
             {
@@ -70,7 +70,7 @@ namespace Kursovaya
         private void update_Click(object sender, EventArgs e)
         {
           
-            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=itproger");
+            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
 
             try
             {

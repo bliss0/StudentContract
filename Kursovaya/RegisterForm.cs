@@ -52,7 +52,7 @@ namespace Kursovaya
             
 
             DB db = new DB();// подключение к БД
-            MySqlCommand command = new MySqlCommand("INSERT INTO `users` (`login`, `password`, `name`, `surname`) VALUES (@login,@pass, @name, @surname)",db.GetConnection());// запрос в БД
+            MySqlCommand command = new MySqlCommand("INSERT INTO `accounts` (`Login`, `Password`, `Name`, `Surname`) VALUES (@login,@pass, @name, @surname)", db.GetConnection());// запрос в БД
 
             //запись значений из полей в формах в БД
             command.Parameters.Add("@login", MySqlDbType.VarChar).Value = loginField.Text;
@@ -79,7 +79,7 @@ namespace Kursovaya
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();// адаптер данных
 
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @uL ", db.GetConnection());// запрос
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `accounts` WHERE `Login` = @uL ", db.GetConnection());// запрос
 
             command.Parameters.Add("@uL", MySqlDbType.VarChar).Value = loginField.Text; // установка параметров для маски
 

@@ -35,7 +35,7 @@ namespace Kursovaya
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();// адаптер
 
-            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=itproger");// соединение
+            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");// соединение
 
             MySqlCommand command = new MySqlCommand($"INSERT INTO `stations` (`nameOfStation`, `{Convert.ToString(road.SelectedItem)}`) VALUES(@nameOfS, @time)", db.GetConnection());// запрос 
 

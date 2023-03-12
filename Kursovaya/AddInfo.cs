@@ -22,7 +22,7 @@ namespace Kursovaya
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=itproger");
+            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
 
             MySqlCommand command = new MySqlCommand($"SELECT nameOfStation FROM stations;", db.GetConnection());
 
@@ -47,7 +47,7 @@ namespace Kursovaya
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();// адаптер
 
-            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=itproger");// соединение
+            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");// соединение
 
             MySqlCommand command = new MySqlCommand($"UPDATE stations SET `{Convert.ToString(boxRoads.SelectedItem)}` = @time WHERE nameOfStation = '{Convert.ToString(boxStations.SelectedItem)}';", db.GetConnection());// запрос 
 
