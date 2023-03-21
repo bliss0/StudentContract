@@ -52,20 +52,6 @@ namespace Kursovaya
             Application.Exit();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {      
-            AddStation addstation = new AddStation();
-            addstation.Show();
-
-        }
-
-        private void deleteStation_Click(object sender, EventArgs e)
-        {
-            DeleteStation deleteStation = new DeleteStation();
-            deleteStation.Show();
-            
-
-        }
         
         private void update_Click(object sender, EventArgs e)
         {
@@ -94,11 +80,6 @@ namespace Kursovaya
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            AddInfo add = new AddInfo();
-            add.Show();
-        }
 
         Point lastpoint;
         private void label5_MouseMove(object sender, MouseEventArgs e)
@@ -113,6 +94,18 @@ namespace Kursovaya
         private void label5_MouseDown(object sender, MouseEventArgs e)
         {
             lastpoint = new Point(e.X, e.Y);
+        }
+
+        private void formContract_Click(object sender, EventArgs e)
+        {
+            FormStudentContract formStudentContract = new FormStudentContract();
+            formStudentContract.Show();
+        }
+
+        private void getContracts_Click(object sender, EventArgs e)
+        {
+            InfoAboutStudentContracts infoAboutStudentContracts = new InfoAboutStudentContracts();
+            infoAboutStudentContracts.Show();
         }
     }
     

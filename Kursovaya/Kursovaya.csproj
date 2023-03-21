@@ -70,6 +70,18 @@
     <Compile Include="DeleteStation.Designer.cs">
       <DependentUpon>DeleteStation.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormStudentContract.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStudentContract.Designer.cs">
+      <DependentUpon>FormStudentContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoAboutStudentContracts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoAboutStudentContracts.Designer.cs">
+      <DependentUpon>InfoAboutStudentContracts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Loginform.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +110,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DeleteStation.resx">
       <DependentUpon>DeleteStation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStudentContract.resx">
+      <DependentUpon>FormStudentContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoAboutStudentContracts.resx">
+      <DependentUpon>InfoAboutStudentContracts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Loginform.resx">
       <DependentUpon>Loginform.cs</DependentUpon>
