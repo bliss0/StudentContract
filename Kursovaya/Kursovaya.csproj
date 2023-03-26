@@ -63,6 +63,7 @@
     <Compile Include="AddStation.Designer.cs">
       <DependentUpon>AddStation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Student.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="DeleteStation.cs">
       <SubType>Form</SubType>

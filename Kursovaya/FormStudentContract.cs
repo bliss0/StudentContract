@@ -15,6 +15,7 @@ namespace Kursovaya
         public FormStudentContract()
         {
             InitializeComponent();
+
         }
 
         private void FormStudentContract_Load(object sender, EventArgs e)

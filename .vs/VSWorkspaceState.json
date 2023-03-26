@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Kursovaya"
   ],
-  "SelectedNode": "\\Kursovaya.sln",
+  "SelectedNode": "\\Kursovaya\\RegisterForm.cs",
   "PreviewInSolutionExplorer": false
 }

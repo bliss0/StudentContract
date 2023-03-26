@@ -49,31 +49,36 @@ namespace Kursovaya
             
             if(isUserExist())// проверка на существование пользователя
                 return;
-            
 
-            DB db = new DB();// подключение к БД
-            MySqlCommand command = new MySqlCommand("INSERT INTO `accounts` (`Login`, `Password`, `Name`, `Surname`) VALUES (@login,@pass, @name, @surname)", db.GetConnection());// запрос в БД
+            if (isStudentExist())
+            {
+                Student student = new Student();
+                DB db = new DB();// подключение к БД
+                MySqlCommand command = new MySqlCommand("INSERT INTO `accounts` (`Login`, `Password`, `Name`, `Surname`,`DateOfBirth`) VALUES (@login,@pass, @name, @surname, @dateOfBirth)", db.GetConnection());// запрос в БД
 
-            //запись значений из полей в формах в БД
-            command.Parameters.Add("@login", MySqlDbType.VarChar).Value = loginField.Text;
-            command.Parameters.Add("@pass", MySqlDbType.VarChar).Value = passwordFiend.Text;
-            command.Parameters.Add("@name", MySqlDbType.VarChar).Value = userNameField.Text;
-            command.Parameters.Add("@surname", MySqlDbType.VarChar).Value = userSurnameField.Text;
+                //запись значений из полей в формах в БД
+                command.Parameters.Add("@login", MySqlDbType.VarChar).Value = loginField.Text;
+                command.Parameters.Add("@pass", MySqlDbType.VarChar).Value = passwordFiend.Text;
+                command.Parameters.Add("@name", MySqlDbType.VarChar).Value = userNameField.Text;
+                command.Parameters.Add("@surname", MySqlDbType.VarChar).Value = userSurnameField.Text;
+                command.Parameters.Add("@dateOfBirth", MySqlDbType.VarChar).Value = dateOfBitrhForm.Text;
 
-            db.openConnection();// открываем подключение к БД
+                db.openConnection();// открываем подключение к БД
 
-            if (command.ExecuteNonQuery() == 1) // проверка выполнения запроса
-                 MessageBox.Show("Аккаунт был создан");
-            else
-                 MessageBox.Show("Аккаунт не был создан");
-            db.closeConnection();
+                if (command.ExecuteNonQuery() == 1) // проверка выполнения запроса
+                    MessageBox.Show("Аккаунт был создан");
+                else
+                    MessageBox.Show("Аккаунт не был создан");
+                db.closeConnection();
+            }
+            else MessageBox.Show("Такого студента не существует");
         
         }
 
         public Boolean isUserExist()// существование пользователя
             {
            
-            DB db = new DB();// подключение к БД
+            DB db = new DB();// подключение к 
 
             DataTable table = new DataTable();// таблица с данными
 
@@ -97,6 +102,31 @@ namespace Kursovaya
             
         }
 
+        public Boolean isStudentExist()
+        {
+            DB db = new DB();
+
+            DataTable table = new DataTable();// таблица с данными
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();// адаптер данных
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `student` WHERE `FIO` LIKE @fio AND `DateOfBirth` LIKE @dateOfBirth", db.GetConnection());// запрос
+
+            command.Parameters.Add("@fio", MySqlDbType.VarChar).Value = userSurnameField.Text+' '+userNameField.Text+'%';
+            command.Parameters.Add("@dateOfBirth", MySqlDbType.VarChar).Value = dateOfBitrhForm.Text;
+
+            adapter.SelectCommand = command;// установка адаптера на новый запрос
+            adapter.Fill(table);// заполнение таблицы
+
+            if (table.Rows.Count > 0)// проверка выполнения запроса
+            {
+
+                return true;
+            }
+            else
+
+                return false;
+        }
         
       
         Point lastpoint;
