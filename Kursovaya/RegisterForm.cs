@@ -14,6 +14,8 @@ namespace Kursovaya
 {
     public partial class RegisterForm : Form
     {
+        String studentId;
+        Student student;
         public RegisterForm()
         {
             InitializeComponent();
@@ -52,9 +54,11 @@ namespace Kursovaya
 
             if (isStudentExist())
             {
-                Student student = new Student();
+
                 DB db = new DB();// подключение к БД
-                MySqlCommand command = new MySqlCommand("INSERT INTO `accounts` (`Login`, `Password`, `Name`, `Surname`,`DateOfBirth`) VALUES (@login,@pass, @name, @surname, @dateOfBirth)", db.GetConnection());// запрос в БД
+                MySqlCommand command = new MySqlCommand("INSERT INTO `accounts` (`Login`, `Password`, `Name`, `Surname`,`DateOfBirth`) VALUES (@login,@pass, @name, @surname, @dateOfBirth);" +
+                    "SELECT @@identity;" +
+                    "UPDATE `student` SET `AccountId`=@@identity WHERE `StudentId`=@studentId", db.GetConnection());// запрос в БД
 
                 //запись значений из полей в формах в БД
                 command.Parameters.Add("@login", MySqlDbType.VarChar).Value = loginField.Text;
@@ -62,11 +66,19 @@ namespace Kursovaya
                 command.Parameters.Add("@name", MySqlDbType.VarChar).Value = userNameField.Text;
                 command.Parameters.Add("@surname", MySqlDbType.VarChar).Value = userSurnameField.Text;
                 command.Parameters.Add("@dateOfBirth", MySqlDbType.VarChar).Value = dateOfBitrhForm.Text;
+                command.Parameters.Add("@studentId", MySqlDbType.VarChar).Value = studentId;
 
                 db.openConnection();// открываем подключение к БД
 
-                if (command.ExecuteNonQuery() == 1) // проверка выполнения запроса
+                if (command.ExecuteNonQuery() == 1)
+                {
+
+                    // проверка выполнения запроса
+
                     MessageBox.Show("Аккаунт был создан");
+
+                }
+                    
                 else
                     MessageBox.Show("Аккаунт не был создан");
                 db.closeConnection();
@@ -120,6 +132,8 @@ namespace Kursovaya
 
             if (table.Rows.Count > 0)// проверка выполнения запроса
             {
+                DataRow row = table.Rows[0];
+                studentId = row["StudentId"].ToString();
 
                 return true;
             }
@@ -127,10 +141,9 @@ namespace Kursovaya
 
                 return false;
         }
-        
-      
+
+
         Point lastpoint;
-        
         private void label1_MouseDown(object sender, MouseEventArgs e)// перемещение приложения
         {
             lastpoint = new Point(e.X, e.Y);

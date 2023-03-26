@@ -8,8 +8,14 @@ namespace Kursovaya
 {
     internal class Student
     {
-        public String name;
-        public String surname;
-        public DateTime dateOfBirth;
+        public String FIO;
+        public String dateOfBirth;
+        
+        public Student(String FIO, String dateOfBirth)
+        {
+            this.FIO = FIO;
+            this.dateOfBirth = dateOfBirth;
+
+        }
     }
 }

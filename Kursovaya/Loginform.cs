@@ -48,11 +48,12 @@ namespace Kursovaya
 
             adapter.SelectCommand = command;// выдаем запрос адаптеру
             adapter.Fill(table);// заполняем таблицу
-
             if (table.Rows.Count > 0)// если в таблицу хоть 1 столбец, то мы вошли правильно
             {             
                 this.Hide();
-                MainForm mainForm = new MainForm();
+                DataRow row = table.Rows[0];
+                String accountId = row["AccountId"].ToString();
+                MainForm mainForm = new MainForm(accountId);
                 mainForm.Show();
             }
             else

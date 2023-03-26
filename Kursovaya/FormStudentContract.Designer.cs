@@ -30,7 +30,7 @@
         {
             this.nameBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.SurnameBox = new System.Windows.Forms.TextBox();
+            this.surnameBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,8 +40,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.secondSurnameBox = new System.Windows.Forms.TextBox();
+            this.dateOfBirth = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // nameBox
@@ -61,12 +61,12 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Имя";
             // 
-            // SurnameBox
+            // surnameBox
             // 
-            this.SurnameBox.Location = new System.Drawing.Point(160, 71);
-            this.SurnameBox.Name = "SurnameBox";
-            this.SurnameBox.Size = new System.Drawing.Size(207, 22);
-            this.SurnameBox.TabIndex = 2;
+            this.surnameBox.Location = new System.Drawing.Point(160, 71);
+            this.surnameBox.Name = "surnameBox";
+            this.surnameBox.Size = new System.Drawing.Size(207, 22);
+            this.surnameBox.TabIndex = 2;
             // 
             // label2
             // 
@@ -143,27 +143,27 @@
             this.label7.TabIndex = 11;
             this.label7.Text = "Дата рождения";
             // 
-            // textBox4
+            // secondSurnameBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(159, 113);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(207, 22);
-            this.textBox4.TabIndex = 12;
+            this.secondSurnameBox.Location = new System.Drawing.Point(159, 113);
+            this.secondSurnameBox.Name = "secondSurnameBox";
+            this.secondSurnameBox.Size = new System.Drawing.Size(207, 22);
+            this.secondSurnameBox.TabIndex = 12;
             // 
-            // textBox5
+            // dateOfBirth
             // 
-            this.textBox5.Location = new System.Drawing.Point(160, 154);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(207, 22);
-            this.textBox5.TabIndex = 13;
+            this.dateOfBirth.Location = new System.Drawing.Point(160, 154);
+            this.dateOfBirth.Name = "dateOfBirth";
+            this.dateOfBirth.Size = new System.Drawing.Size(207, 22);
+            this.dateOfBirth.TabIndex = 13;
             // 
             // FormStudentContract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.dateOfBirth);
+            this.Controls.Add(this.secondSurnameBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -173,7 +173,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.SurnameBox);
+            this.Controls.Add(this.surnameBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nameBox);
             this.Name = "FormStudentContract";
@@ -188,7 +188,7 @@
 
         private System.Windows.Forms.TextBox nameBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox SurnameBox;
+        private System.Windows.Forms.TextBox surnameBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
@@ -198,7 +198,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox secondSurnameBox;
+        private System.Windows.Forms.TextBox dateOfBirth;
     }
 }

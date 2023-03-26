@@ -15,9 +15,11 @@ namespace Kursovaya
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        String accountId;
+        public MainForm(String accountId)
         {
             InitializeComponent();
+            this.accountId = accountId;
             MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
 
             try
@@ -81,6 +83,8 @@ namespace Kursovaya
         }
 
 
+
+
         Point lastpoint;
         private void label5_MouseMove(object sender, MouseEventArgs e)
         {          
@@ -98,7 +102,7 @@ namespace Kursovaya
 
         private void formContract_Click(object sender, EventArgs e)
         {
-            FormStudentContract formStudentContract = new FormStudentContract();
+            FormStudentContract formStudentContract = new FormStudentContract(accountId);
             formStudentContract.Show();
         }
 
