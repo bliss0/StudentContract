@@ -32,16 +32,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.surnameBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.seriesAndNumber = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.whoAndWhenTextBox = new System.Windows.Forms.TextBox();
+            this.adressBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.secondSurnameBox = new System.Windows.Forms.TextBox();
             this.dateOfBirth = new System.Windows.Forms.TextBox();
+            this.formContractButton = new System.Windows.Forms.Button();
+            this.companiesBox = new System.Windows.Forms.ComboBox();
+            this.vacanciesBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // nameBox
@@ -77,12 +80,12 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Фамилия";
             // 
-            // textBox1
+            // seriesAndNumber
             // 
-            this.textBox1.Location = new System.Drawing.Point(233, 197);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(133, 22);
-            this.textBox1.TabIndex = 4;
+            this.seriesAndNumber.Location = new System.Drawing.Point(234, 197);
+            this.seriesAndNumber.Name = "seriesAndNumber";
+            this.seriesAndNumber.Size = new System.Drawing.Size(133, 22);
+            this.seriesAndNumber.TabIndex = 4;
             // 
             // label3
             // 
@@ -102,19 +105,19 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Кем и когда выдан";
             // 
-            // textBox2
+            // whoAndWhenTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(233, 234);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(133, 22);
-            this.textBox2.TabIndex = 7;
+            this.whoAndWhenTextBox.Location = new System.Drawing.Point(233, 234);
+            this.whoAndWhenTextBox.Name = "whoAndWhenTextBox";
+            this.whoAndWhenTextBox.Size = new System.Drawing.Size(133, 22);
+            this.whoAndWhenTextBox.TabIndex = 7;
             // 
-            // textBox3
+            // adressBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(233, 269);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(133, 22);
-            this.textBox3.TabIndex = 8;
+            this.adressBox.Location = new System.Drawing.Point(233, 269);
+            this.adressBox.Name = "adressBox";
+            this.adressBox.Size = new System.Drawing.Size(133, 22);
+            this.adressBox.TabIndex = 8;
             // 
             // label5
             // 
@@ -157,28 +160,56 @@
             this.dateOfBirth.Size = new System.Drawing.Size(207, 22);
             this.dateOfBirth.TabIndex = 13;
             // 
+            // formContractButton
+            // 
+            this.formContractButton.Location = new System.Drawing.Point(629, 377);
+            this.formContractButton.Name = "formContractButton";
+            this.formContractButton.Size = new System.Drawing.Size(140, 61);
+            this.formContractButton.TabIndex = 14;
+            this.formContractButton.Text = "Сформировать и отправить";
+            this.formContractButton.UseVisualStyleBackColor = true;
+            this.formContractButton.Click += new System.EventHandler(this.formContractButton_Click);
+            // 
+            // companiesBox
+            // 
+            this.companiesBox.FormattingEnabled = true;
+            this.companiesBox.Location = new System.Drawing.Point(602, 57);
+            this.companiesBox.Name = "companiesBox";
+            this.companiesBox.Size = new System.Drawing.Size(167, 24);
+            this.companiesBox.TabIndex = 15;
+            // 
+            // vacanciesBox
+            // 
+            this.vacanciesBox.FormattingEnabled = true;
+            this.vacanciesBox.Location = new System.Drawing.Point(602, 132);
+            this.vacanciesBox.Name = "vacanciesBox";
+            this.vacanciesBox.Size = new System.Drawing.Size(167, 24);
+            this.vacanciesBox.TabIndex = 16;
+            // 
             // FormStudentContract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.vacanciesBox);
+            this.Controls.Add(this.companiesBox);
+            this.Controls.Add(this.formContractButton);
             this.Controls.Add(this.dateOfBirth);
             this.Controls.Add(this.secondSurnameBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.adressBox);
+            this.Controls.Add(this.whoAndWhenTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.seriesAndNumber);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.surnameBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nameBox);
             this.Name = "FormStudentContract";
             this.Text = "FormStudentContract";
-            this.Load += new System.EventHandler(this.FormStudentContract_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,15 +221,18 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox surnameBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox seriesAndNumber;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox whoAndWhenTextBox;
+        private System.Windows.Forms.TextBox adressBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox secondSurnameBox;
         private System.Windows.Forms.TextBox dateOfBirth;
+        private System.Windows.Forms.Button formContractButton;
+        private System.Windows.Forms.ComboBox companiesBox;
+        private System.Windows.Forms.ComboBox vacanciesBox;
     }
 }

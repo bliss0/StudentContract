@@ -70,15 +70,14 @@ namespace Kursovaya
 
                 db.openConnection();// открываем подключение к БД
 
-                if (command.ExecuteNonQuery() == 1)
+                if (command.ExecuteNonQuery()!=0)
                 {
 
                     // проверка выполнения запроса
 
                     MessageBox.Show("Аккаунт был создан");
 
-                }
-                    
+                }                  
                 else
                     MessageBox.Show("Аккаунт не был создан");
                 db.closeConnection();
