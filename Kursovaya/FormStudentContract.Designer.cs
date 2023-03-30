@@ -45,6 +45,9 @@
             this.formContractButton = new System.Windows.Forms.Button();
             this.companiesBox = new System.Windows.Forms.ComboBox();
             this.vacanciesBox = new System.Windows.Forms.ComboBox();
+            this.requerementsBox = new System.Windows.Forms.TextBox();
+            this.competenciesBox = new System.Windows.Forms.TextBox();
+            this.preViewButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // nameBox
@@ -162,7 +165,7 @@
             // 
             // formContractButton
             // 
-            this.formContractButton.Location = new System.Drawing.Point(629, 377);
+            this.formContractButton.Location = new System.Drawing.Point(956, 621);
             this.formContractButton.Name = "formContractButton";
             this.formContractButton.Size = new System.Drawing.Size(140, 61);
             this.formContractButton.TabIndex = 14;
@@ -173,24 +176,55 @@
             // companiesBox
             // 
             this.companiesBox.FormattingEnabled = true;
-            this.companiesBox.Location = new System.Drawing.Point(602, 57);
+            this.companiesBox.Location = new System.Drawing.Point(820, 29);
             this.companiesBox.Name = "companiesBox";
             this.companiesBox.Size = new System.Drawing.Size(167, 24);
             this.companiesBox.TabIndex = 15;
+            this.companiesBox.SelectedIndexChanged += new System.EventHandler(this.companiesBox_SelectedIndexChanged);
             // 
             // vacanciesBox
             // 
             this.vacanciesBox.FormattingEnabled = true;
-            this.vacanciesBox.Location = new System.Drawing.Point(602, 132);
+            this.vacanciesBox.Location = new System.Drawing.Point(820, 74);
             this.vacanciesBox.Name = "vacanciesBox";
             this.vacanciesBox.Size = new System.Drawing.Size(167, 24);
             this.vacanciesBox.TabIndex = 16;
+            this.vacanciesBox.SelectedIndexChanged += new System.EventHandler(this.vacanciesBox_SelectedIndexChanged);
+            // 
+            // requerementsBox
+            // 
+            this.requerementsBox.Location = new System.Drawing.Point(759, 388);
+            this.requerementsBox.Multiline = true;
+            this.requerementsBox.Name = "requerementsBox";
+            this.requerementsBox.Size = new System.Drawing.Size(272, 158);
+            this.requerementsBox.TabIndex = 17;
+            // 
+            // competenciesBox
+            // 
+            this.competenciesBox.Location = new System.Drawing.Point(759, 170);
+            this.competenciesBox.Multiline = true;
+            this.competenciesBox.Name = "competenciesBox";
+            this.competenciesBox.Size = new System.Drawing.Size(272, 158);
+            this.competenciesBox.TabIndex = 18;
+            // 
+            // preViewButton
+            // 
+            this.preViewButton.Location = new System.Drawing.Point(775, 621);
+            this.preViewButton.Name = "preViewButton";
+            this.preViewButton.Size = new System.Drawing.Size(140, 61);
+            this.preViewButton.TabIndex = 19;
+            this.preViewButton.Text = "Предпросмотр docx";
+            this.preViewButton.UseVisualStyleBackColor = true;
+            this.preViewButton.Click += new System.EventHandler(this.preViewButton_Click);
             // 
             // FormStudentContract
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1145, 726);
+            this.Controls.Add(this.preViewButton);
+            this.Controls.Add(this.competenciesBox);
+            this.Controls.Add(this.requerementsBox);
             this.Controls.Add(this.vacanciesBox);
             this.Controls.Add(this.companiesBox);
             this.Controls.Add(this.formContractButton);
@@ -234,5 +268,8 @@
         private System.Windows.Forms.Button formContractButton;
         private System.Windows.Forms.ComboBox companiesBox;
         private System.Windows.Forms.ComboBox vacanciesBox;
+        private System.Windows.Forms.TextBox requerementsBox;
+        private System.Windows.Forms.TextBox competenciesBox;
+        private System.Windows.Forms.Button preViewButton;
     }
 }

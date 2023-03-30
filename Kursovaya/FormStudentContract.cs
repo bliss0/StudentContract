@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace Kursovaya
 {
@@ -70,7 +72,7 @@ namespace Kursovaya
 
         }
 
-        private void getVacancies(String company)
+        private void getVacancies()
         {
             DB db = new DB();// класс БД
 
@@ -80,7 +82,9 @@ namespace Kursovaya
 
             MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
 
-            MySqlCommand command = new MySqlCommand("SELECT VacancyName FROM vacancy WHERE ;", db.GetConnection());
+            MySqlCommand command = new MySqlCommand("SELECT VacancyName FROM vacancy WHERE CompanyId = (SELECT CompanyId FROM company WHERE CompanyName	= @companyId) ;", db.GetConnection());
+
+            command.Parameters.Add("@companyId", MySqlDbType.VarChar).Value = companiesBox.Text;
 
             adapter.SelectCommand = command;// выполение запроса
 
@@ -128,6 +132,62 @@ namespace Kursovaya
             else
                 MessageBox.Show("Ошибка формирования договора");
             db.closeConnection();
+
+        }
+
+        private void companiesBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            vacanciesBox.Items.Clear();
+            getVacancies();
+        }
+
+        private void vacanciesBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DB db = new DB();// класс БД
+
+            DataTable table = new DataTable();
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
+
+            MySqlCommand command = new MySqlCommand("SELECT Competencies,Requierements FROM vacancy WHERE VacancyName = @vacancyName ;", db.GetConnection());
+
+            command.Parameters.Add("@vacancyName", MySqlDbType.VarChar).Value = vacanciesBox.Items[vacanciesBox.SelectedIndex];
+
+            adapter.SelectCommand = command;// выполение запроса
+
+            adapter.Fill(table);
+
+            foreach (DataRow row in table.Rows)
+            {
+                competenciesBox.Text = row[0].ToString();
+                requerementsBox.Text = row[1].ToString();
+            }
+
+        }
+
+        private void preViewButton_Click(object sender, EventArgs e)
+        {
+            Word.Application wordapp = new Word.Application();
+            Word.Document worddocument;
+            wordapp.Visible = true;
+            Object template = Type.Missing;
+            Object newTemplate = false;
+            Object documentType = Word.WdNewDocumentType.wdNewBlankDocument;
+            Object visible = true;
+            //Создаем документ 1
+            wordapp.Documents.Add(
+           ref template, ref newTemplate, ref documentType, ref visible);
+            //Меняем шаблон
+            String currentDirectory = Directory.GetCurrentDirectory().Replace(@"\bin\Debug","");
+            template = $@"{currentDirectory}\inventory\example.docx";
+            MessageBox.Show(template.ToString());
+            //Создаем документ 2 worddocument в данном случае создаваемый объект   E:\C#Projects\Диплом\Kursovaya\inventiory\ 
+            worddocument =
+            wordapp.Documents.Add(
+             ref template, ref newTemplate, ref documentType, ref visible);
+
 
         }
     }
