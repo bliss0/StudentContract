@@ -169,7 +169,53 @@ namespace Kursovaya
 
         private void preViewButton_Click(object sender, EventArgs e)
         {
-            Word.Application wordapp = new Word.Application();
+            FileInfo fileInfo = new FileInfo("example.docx");
+
+            var items = new Dictionary<string, string>
+            {
+                {"$companyName", companiesBox.Text},
+                {"$FIO",nameBox.Text+" "+surnameBox.Text+" "+secondSurnameBox }
+
+            };
+
+            try
+            {
+                var app = new Word.Application();
+                Object file = fileInfo.FullName;
+
+                Object missing = Type.Missing;
+
+                app.Documents.Open(file);
+
+                foreach(var item in items)
+                {
+                    Word.Find find = app.Selection.Find;
+                    find.Text = item.Key;
+                    find.Replacement.Text = item.Value;
+
+                    Object wrap = Word.WdFindWrap.wdFindContinue;
+                    Object replace = Word.WdReplace.wdReplaceAll;
+
+                    find.Execute(FindText: Type.Missing,
+                        MatchCase: false,
+                        MatchWholeWord: false,
+                        MatchWildcards: false,
+                        MatchSoundsLike: missing,
+                        MatchAllWordForms: false,
+                        Forward: true,
+                        Wrap: wrap,
+                        Format: false,
+                        ReplaceWith: missing,Replace: replace);
+                }
+                Object newFileName = Path.Combine(fileInfo.DirectoryName, fileInfo.Name + "new");
+            }
+            catch (Exception ex)
+            {
+
+                Console.Write(ex.Message);
+            }
+
+           /* Word.Application wordapp = new Word.Application();
             Word.Document worddocument;
             wordapp.Visible = true;
             Object template = Type.Missing;
@@ -181,12 +227,12 @@ namespace Kursovaya
            ref template, ref newTemplate, ref documentType, ref visible);
             //Меняем шаблон
             String currentDirectory = Directory.GetCurrentDirectory().Replace(@"\bin\Debug","");
-            template = $@"{currentDirectory}\inventory\example.docx";
+            template = $@"{currentDirectory}\inventory\1.docx";
             MessageBox.Show(template.ToString());
             //Создаем документ 2 worddocument в данном случае создаваемый объект   E:\C#Projects\Диплом\Kursovaya\inventiory\ 
             worddocument =
             wordapp.Documents.Add(
-             ref template, ref newTemplate, ref documentType, ref visible);
+             ref template, ref newTemplate, ref documentType, ref visible);*/
 
 
         }
