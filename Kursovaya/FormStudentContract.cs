@@ -89,7 +89,8 @@ namespace Kursovaya
             surnameBox.Text = ListFio[1];
             secondSurnameBox.Text = ListFio[2];
             dateOfBirth.Text = row["DateOfBirth"].ToString().Substring(0,10);
-            seriesAndNumber.Text = row["Series"].ToString()+" "+row["Number"];
+            series.Text = row["Series"].ToString();
+            number.Text= row["Number"].ToString();
             whoAndWhenTextBox.Text = row["WhoAndWhen"].ToString();
             adressBox.Text = row["Adress"].ToString();
 
@@ -156,7 +157,7 @@ namespace Kursovaya
                     "SELECT @@identity;" +
                     "UPDATE `student` SET `PersonalDataId`=@@identity WHERE `AccountId`=@accountId", db.GetConnection());// запрос
 
-            var seriesAndNum = seriesAndNumber.Text.Split(' ');
+            var seriesAndNum = series.Text.Split(' ');
 
             command.Parameters.Add("@series", MySqlDbType.VarChar).Value = seriesAndNum[0];
             command.Parameters.Add("@number", MySqlDbType.VarChar).Value = seriesAndNum[1];
@@ -263,6 +264,7 @@ namespace Kursovaya
                 SDA.Fill(DATA);
                 requests.DataSource = DATA;
                 connection.Close();
+                requestBox.Items.Clear();
 
                 foreach (DataGridViewRow row in requests.SelectedRows)
                 {
@@ -272,6 +274,7 @@ namespace Kursovaya
                 }
                 foreach (DataRow row in DATA.Rows)
                 {
+
                     requestBox.Items.Add(row[0].ToString());
 
 
