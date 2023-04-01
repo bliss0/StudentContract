@@ -34,14 +34,12 @@
             this.passfiend = new System.Windows.Forms.TextBox();
             this.loginfield = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.getContracts = new System.Windows.Forms.Button();
+            this.formContract = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.formContract = new System.Windows.Forms.Button();
-            this.getContracts = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,7 +103,6 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(139)))), ((int)(((byte)(206)))));
             this.panel1.Controls.Add(this.getContracts);
             this.panel1.Controls.Add(this.formContract);
-            this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -114,15 +111,25 @@
             this.panel1.Size = new System.Drawing.Size(1068, 554);
             this.panel1.TabIndex = 12;
             // 
-            // dataGridView1
+            // getContracts
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(875, 79);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(180, 61);
-            this.dataGridView1.TabIndex = 3;
+            this.getContracts.Location = new System.Drawing.Point(508, 240);
+            this.getContracts.Name = "getContracts";
+            this.getContracts.Size = new System.Drawing.Size(495, 113);
+            this.getContracts.TabIndex = 5;
+            this.getContracts.Text = "Получение информации об ученических договорах";
+            this.getContracts.UseVisualStyleBackColor = true;
+            this.getContracts.Click += new System.EventHandler(this.getContracts_Click);
+            // 
+            // formContract
+            // 
+            this.formContract.Location = new System.Drawing.Point(26, 240);
+            this.formContract.Name = "formContract";
+            this.formContract.Size = new System.Drawing.Size(411, 113);
+            this.formContract.TabIndex = 4;
+            this.formContract.Text = "Формирование договора";
+            this.formContract.UseVisualStyleBackColor = true;
+            this.formContract.Click += new System.EventHandler(this.formContract_Click);
             // 
             // panel3
             // 
@@ -164,26 +171,6 @@
             this.label5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.label5_MouseDown);
             this.label5.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label5_MouseMove);
             // 
-            // formContract
-            // 
-            this.formContract.Location = new System.Drawing.Point(26, 240);
-            this.formContract.Name = "formContract";
-            this.formContract.Size = new System.Drawing.Size(411, 113);
-            this.formContract.TabIndex = 4;
-            this.formContract.Text = "Формирование договора";
-            this.formContract.UseVisualStyleBackColor = true;
-            this.formContract.Click += new System.EventHandler(this.formContract_Click);
-            // 
-            // getContracts
-            // 
-            this.getContracts.Location = new System.Drawing.Point(508, 240);
-            this.getContracts.Name = "getContracts";
-            this.getContracts.Size = new System.Drawing.Size(495, 113);
-            this.getContracts.TabIndex = 5;
-            this.getContracts.Text = "Получение информации об ученических договорах";
-            this.getContracts.UseVisualStyleBackColor = true;
-            this.getContracts.Click += new System.EventHandler(this.getContracts_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -200,7 +187,6 @@
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
@@ -219,7 +205,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button formContract;
         private System.Windows.Forms.Button getContracts;
     }

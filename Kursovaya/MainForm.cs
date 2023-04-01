@@ -20,32 +20,6 @@ namespace Kursovaya
         {
             InitializeComponent();
             this.accountId = accountId;
-            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
-
-            try
-            {
-                connection.Open();
-                MySqlDataAdapter SDA = new MySqlDataAdapter("SELECT * FROM stations", connection);
-                DataTable DATA = new DataTable();
-                SDA.Fill(DATA);
-                dataGridView1.DataSource = DATA;
-                connection.Close();
-
-                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                {
-                    if (!row.IsNewRow)
-                        dataGridView1.Rows.Remove(row);
-                }
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                connection.Close();
-            }
 
         }
 
@@ -58,28 +32,6 @@ namespace Kursovaya
         private void update_Click(object sender, EventArgs e)
         {
           
-            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
-
-            try
-            {
-                connection.Open();
-                MySqlDataAdapter SDA = new MySqlDataAdapter("SELECT * FROM stations", connection);
-                DataTable DATA = new DataTable();
-                SDA.Fill(DATA);
-                dataGridView1.DataSource = DATA;
-                connection.Close();
-
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                connection.Close();             
-            }
-
         }
 
 
