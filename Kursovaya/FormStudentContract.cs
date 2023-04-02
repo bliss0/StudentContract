@@ -107,7 +107,7 @@ namespace Kursovaya
 
             MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
 
-            MySqlCommand command = new MySqlCommand("SELECT CompanyName FROM company WHERE (SELECT CompanyId FROM vacancy WHERE VacancyId = (SELECT VacancyId FROM contract WHERE ContractId = @contractId));", db.GetConnection());
+            MySqlCommand command = new MySqlCommand("SELECT CompanyName FROM company WHERE CompanyId = (SELECT CompanyId FROM vacancy WHERE VacancyId = (SELECT VacancyId FROM contract WHERE ContractId = @contractId));", db.GetConnection());
 
             command.Parameters.Add("@contractId", MySqlDbType.VarChar).Value = requestBox.Text;
 
@@ -182,16 +182,24 @@ namespace Kursovaya
         {
             FileInfo fileInfo = new FileInfo("example.docx");
 
+
+
             var items = new Dictionary<string, string>
             {
                 {"$companyName", companiesBox.Text},
-                {"$FIO",nameBox.Text+" "+surnameBox.Text+" "+secondSurnameBox }
+                {"$FIO",nameBox.Text+" "+surnameBox.Text+" "+secondSurnameBox.Text },
+                {"$dateOfBirth", dateOfBirth.Text},
+                {"$series",series.Text },
+                {"$number",number.Text },
+                {"$whoAndWhen",whoAndWhenTextBox.Text },
+                {"$studentAdress",adressBox.Text}
 
             };
-
+            Word.Application app=null;
             try
             {
-                var app = new Word.Application();
+                app = new Word.Application();
+                app.Visible = true;
                 Object file = fileInfo.FullName;
 
                 Object missing = Type.Missing;
@@ -218,32 +226,15 @@ namespace Kursovaya
                         Format: false,
                         ReplaceWith: missing,Replace: replace);
                 }
-                Object newFileName = Path.Combine(fileInfo.DirectoryName, fileInfo.Name + "new");
+                Object newFileName = Path.Combine(fileInfo.DirectoryName, "formed_"+fileInfo.Name) ;
+                app.ActiveDocument.SaveAs2(newFileName);
+                //app.ActiveDocument.Close();
             }
             catch (Exception ex)
             {
 
                 Console.Write(ex.Message);
             }
-
-           /* Word.Application wordapp = new Word.Application();
-            Word.Document worddocument;
-            wordapp.Visible = true;
-            Object template = Type.Missing;
-            Object newTemplate = false;
-            Object documentType = Word.WdNewDocumentType.wdNewBlankDocument;
-            Object visible = true;
-            //Создаем документ 1
-            wordapp.Documents.Add(
-           ref template, ref newTemplate, ref documentType, ref visible);
-            //Меняем шаблон
-            String currentDirectory = Directory.GetCurrentDirectory().Replace(@"\bin\Debug","");
-            template = $@"{currentDirectory}\inventory\1.docx";
-            MessageBox.Show(template.ToString());
-            //Создаем документ 2 worddocument в данном случае создаваемый объект   E:\C#Projects\Диплом\Kursovaya\inventiory\ 
-            worddocument =
-            wordapp.Documents.Add(
-             ref template, ref newTemplate, ref documentType, ref visible);*/
 
 
         }
