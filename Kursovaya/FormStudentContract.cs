@@ -6,6 +6,8 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +18,12 @@ namespace Kursovaya
     public partial class FormStudentContract : Form
     {
         String id;
+        String companyAdress;
+        String INN;
+        String KPP;
+        String BIK;
+        String ORGN;
+        String OKTMO;
         public FormStudentContract(String accountId)
         {
             InitializeComponent();
@@ -85,8 +93,8 @@ namespace Kursovaya
             DataRow row = table.Rows[0];
             String FIO = row["FIO"].ToString();
             var ListFio = FIO.Split(' ');
-            nameBox.Text = ListFio[0];
-            surnameBox.Text = ListFio[1];
+            nameBox.Text = ListFio[1];
+            surnameBox.Text = ListFio[0];
             secondSurnameBox.Text = ListFio[2];
             dateOfBirth.Text = row["DateOfBirth"].ToString().Substring(0,10);
             series.Text = row["Series"].ToString();
@@ -147,7 +155,70 @@ namespace Kursovaya
 
         private void formContractButton_Click(object sender, EventArgs e)
         {
-            DB db = new DB();
+
+            FileInfo fileInfo = new FileInfo("example.docx");
+
+            var items = new Dictionary<string, string>
+            {
+                {"$companyName", companiesBox.Text},
+                {"$FIO",surnameBox.Text+" "+nameBox.Text+" "+secondSurnameBox.Text },
+                {"$dateOfBirth", dateOfBirth.Text},
+                {"$series",series.Text },
+                {"$number",number.Text },
+                {"$whoAndWhen",whoAndWhenTextBox.Text },
+                {"$studentAdress",adressBox.Text},
+                {"$companyAdress",companyAdress},
+                {"$INN",INN},
+                {"$KPP",KPP},
+                {"$BIK",BIK},
+                {"$ORGN",ORGN},
+                {"$OKTMO",OKTMO},
+                {"$initials", surnameBox.Text+' '+nameBox.Text.Substring(0,1)+'.'+secondSurnameBox.Text.Substring(0,1)+'.'}
+
+            };
+            Word.Application app = null;
+            try
+            {
+                app = new Word.Application();
+                Object file = fileInfo.FullName;
+
+                Object missing = Type.Missing;
+
+                app.Documents.Open(file);
+
+                foreach (var item in items)
+                {
+                    Word.Find find = app.Selection.Find;
+                    find.Text = item.Key;
+                    find.Replacement.Text = item.Value;
+
+                    Object wrap = Word.WdFindWrap.wdFindContinue;
+                    Object replace = Word.WdReplace.wdReplaceAll;
+
+                    find.Execute(FindText: Type.Missing,
+                        MatchCase: false,
+                        MatchWholeWord: false,
+                        MatchWildcards: false,
+                        MatchSoundsLike: missing,
+                        MatchAllWordForms: false,
+                        Forward: true,
+                        Wrap: wrap,
+                        Format: false,
+                        ReplaceWith: missing, Replace: replace);
+                }
+                Object newFileName = Path.Combine(fileInfo.DirectoryName, fileInfo.DirectoryName, nameBox.Text + '_' + surnameBox.Text +'_'+DateTime.Now.ToString("yyyyMMdd")+ ".docx");
+                app.ActiveDocument.SaveAs2(newFileName);
+                app.ActiveDocument.Close();
+                app.Quit();
+            }
+            catch (Exception ex)
+            {
+
+                Console.Write(ex.Message);
+            }
+
+
+           /* DB db = new DB();
 
             DataTable table = new DataTable();// таблица с данными
 
@@ -174,7 +245,11 @@ namespace Kursovaya
             }
             else
                 MessageBox.Show("Ошибка формирования договора");
-            db.closeConnection();
+            db.closeConnection();*/
+
+
+            SendEmailAsync(Path.Combine(fileInfo.DirectoryName, nameBox.Text + '_' + surnameBox.Text + '_' + DateTime.Now.ToString("yyyyMMdd") + ".docx")).GetAwaiter();
+
 
         }
 
@@ -182,17 +257,23 @@ namespace Kursovaya
         {
             FileInfo fileInfo = new FileInfo("example.docx");
 
-
-
             var items = new Dictionary<string, string>
             {
                 {"$companyName", companiesBox.Text},
-                {"$FIO",nameBox.Text+" "+surnameBox.Text+" "+secondSurnameBox.Text },
+                {"$FIO",surnameBox.Text+" "+nameBox.Text+" "+secondSurnameBox.Text },
                 {"$dateOfBirth", dateOfBirth.Text},
                 {"$series",series.Text },
                 {"$number",number.Text },
                 {"$whoAndWhen",whoAndWhenTextBox.Text },
-                {"$studentAdress",adressBox.Text}
+                {"$companyAdress",companyAdress},
+                {"$studentAdress",adressBox.Text},
+                {"$INN",INN},
+                {"$KPP",KPP},
+                {"$BIK",BIK},
+                {"$ORGN",ORGN},
+                {"$OKTMO",OKTMO},
+                {"$initials",surnameBox.Text+' '+nameBox.Text.Substring(0,1)+'.'+secondSurnameBox.Text.Substring(0,1)+'.'}
+
 
             };
             Word.Application app=null;
@@ -226,9 +307,11 @@ namespace Kursovaya
                         Format: false,
                         ReplaceWith: missing,Replace: replace);
                 }
-                Object newFileName = Path.Combine(fileInfo.DirectoryName, "formed_"+fileInfo.Name) ;
-                app.ActiveDocument.SaveAs2(newFileName);
+                Object newFileName = Path.Combine(fileInfo.DirectoryName, nameBox.Text + '_' + surnameBox.Text + '_' + DateTime.Now.ToString("yyyyMMdd") + ".docx");
+
+                //app.ActiveDocument.SaveAs2(newFileName);
                 //app.ActiveDocument.Close();
+                //app.Quit();
             }
             catch (Exception ex)
             {
@@ -242,6 +325,51 @@ namespace Kursovaya
         private void requestBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             GetInfoAboutRequest();
+            GetInfoAboutCompany();
+
+        }
+
+        private static async Task SendEmailAsync(Object path)
+        {
+            MailAddress from = new MailAddress("andrej.kozhan00@mail.ru", "Andrey");
+            MailAddress to = new MailAddress("kozhan.andrej@mail.ru");
+            MailMessage m = new MailMessage(from, to);
+            m.Subject = "Письмо на почту предприятия";
+            m.Body = "Примерное";
+            m.Attachments.Add(new Attachment(path.ToString()));
+            SmtpClient smtp = new SmtpClient("smtp.mail.ru", 587);
+            smtp.Credentials = new NetworkCredential("andrej.kozhan00@mail.ru", "HAGYJWiuccGUX2BLnmth");
+            smtp.EnableSsl = true;
+            await smtp.SendMailAsync(m);
+            MessageBox.Show($"Письмо отправлено ({m.Subject})");
+        }
+
+        public void GetInfoAboutCompany()
+        {
+            DB db = new DB();// класс БД
+
+            DataTable table = new DataTable();
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+
+            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
+
+            MySqlCommand command = new MySqlCommand("SELECT Adress,INN,KPP,BIK,ORGN,OKTMO FROM company WHERE CompanyName = @companyName", db.GetConnection());
+
+            command.Parameters.Add("@companyName", MySqlDbType.VarChar).Value = companiesBox.Text;
+
+            adapter.SelectCommand = command;// выполение запроса
+
+            adapter.Fill(table);
+
+            DataRow row = table.Rows[0];
+            companyAdress= row[0].ToString();
+            INN= row[1].ToString();
+            KPP= row[2].ToString();
+            BIK = row[3].ToString();
+            ORGN = row[4].ToString();
+            OKTMO = row[5].ToString();
+
         }
 
         private void reloadButton_Click(object sender, EventArgs e)
