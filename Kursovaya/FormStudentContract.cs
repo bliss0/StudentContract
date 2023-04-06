@@ -33,7 +33,7 @@ namespace Kursovaya
             InitializeComponent();
             id = accountId;
 
-            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
+            MySqlConnection connection = new MySqlConnection("server=91.211.52.148;port=3356;user=developer;password=SgmZ9mZ2LcVEJS8w;database=db_develop");
             try
             {
                 connection.Open();
@@ -88,7 +88,7 @@ namespace Kursovaya
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();// адаптер данных
 
-            MySqlCommand command = new MySqlCommand("SELECT student.FIO, student.DateOfBirth, personaldata.Series, personaldata.Number, personaldata.WhoAndWhen, personaldata.Adress, groups.Cipher FROM student JOIN personaldata ON student.PersonalDataId = personaldata.PersonalDataId JOIN groups ON student.GroupId = groups.GroupId WHERE StudentId = (SELECT StudentId FROM contract WHERE ContractId = @contractId);", db.GetConnection());// запрос
+            MySqlCommand command = new MySqlCommand("SELECT student.FIO, student.DateOfBirth, personaldata.Series, personaldata.Number, personaldata.WhoAndWhen, personaldata.Adress, groups.Cipher FROM `student` JOIN `personaldata` ON student.PersonalDataId = personaldata.PersonalDataId JOIN `groups` ON student.GroupId = groups.GroupId WHERE `StudentId` = (SELECT `StudentId` FROM `contract` WHERE `ContractId` = @contractId);", db.GetConnection());// запрос
 
             command.Parameters.Add("@contractId", MySqlDbType.VarChar).Value = requestBox.Text;
 
@@ -119,7 +119,7 @@ namespace Kursovaya
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
+            MySqlConnection connection = new MySqlConnection("server=91.211.52.148;port=3356;user=developer;password=SgmZ9mZ2LcVEJS8w;database=db_develop");
 
             MySqlCommand command = new MySqlCommand("SELECT CompanyName, Email FROM company WHERE CompanyId = (SELECT CompanyId FROM vacancy WHERE VacancyId = (SELECT VacancyId FROM contract WHERE ContractId = @contractId));", db.GetConnection());
 
@@ -144,7 +144,7 @@ namespace Kursovaya
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
+            MySqlConnection connection = new MySqlConnection("server=91.211.52.148;port=3356;user=developer;password=SgmZ9mZ2LcVEJS8w;database=db_develop");
 
             MySqlCommand command = new MySqlCommand("SELECT VacancyName, Competencies, Requierements FROM vacancy WHERE VacancyId = (SELECT VacancyId FROM contract WHERE ContractId = @contractId) ;", db.GetConnection());
 
@@ -365,7 +365,7 @@ namespace Kursovaya
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
+            MySqlConnection connection = new MySqlConnection("server=91.211.52.148;port=3356;user=developer;password=SgmZ9mZ2LcVEJS8w;database=db_develop");
 
             MySqlCommand command = new MySqlCommand("SELECT Adress,INN,KPP,BIK,ORGN,OKTMO,KaznSchet FROM company WHERE CompanyName = @companyName", db.GetConnection());
 
@@ -403,7 +403,7 @@ namespace Kursovaya
             competenciesBox.Text = "";
 
 
-            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
+            MySqlConnection connection = new MySqlConnection("server=91.211.52.148;port=3356;user=developer;password=SgmZ9mZ2LcVEJS8w;database=db_develop");
             try
             {
                 connection.Open();

@@ -22,7 +22,7 @@ namespace Kursovaya
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
+            MySqlConnection connection = new MySqlConnection("server=91.211.52.148;port=3356;user=developer;password=SgmZ9mZ2LcVEJS8w;database=db_develop");
 
             MySqlCommand command = new MySqlCommand($"SELECT nameOfStation FROM stations;", db.GetConnection());
 
@@ -48,7 +48,7 @@ namespace Kursovaya
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
+            MySqlConnection connection = new MySqlConnection("server=91.211.52.148;port=3356;user=developer;password=SgmZ9mZ2LcVEJS8w;database=db_develop");
 
             MySqlCommand command = new MySqlCommand($"DELETE FROM stations WHERE nameOfStation ='{ Convert.ToString(comboBox1.SelectedItem)}';", db.GetConnection());
 

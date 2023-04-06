@@ -11,7 +11,7 @@ namespace Kursovaya
     class DB
     {
         // данные о соединении
-        MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract"); // данные берутся с локального сервера при подключении mysql
+        MySqlConnection connection = new MySqlConnection("server=91.211.52.148;port=3356;user=developer;password=SgmZ9mZ2LcVEJS8w;database=db_develop"); // данные берутся с локального сервера при подключении mysql
                                                                                                               // БД к какой коннектим          
 
         public void openConnection () // открытие подключения
