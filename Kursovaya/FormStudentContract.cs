@@ -18,12 +18,16 @@ namespace Kursovaya
     public partial class FormStudentContract : Form
     {
         String id;
+        String cipher;
         String companyAdress;
+        String companyEmail;
         String INN;
         String KPP;
         String BIK;
         String ORGN;
         String OKTMO;
+        String KaznSchet;
+
         public FormStudentContract(String accountId)
         {
             InitializeComponent();
@@ -73,6 +77,7 @@ namespace Kursovaya
             getVacancies();
 
 
+
         }
 
         public void GetInfoAboutUser()
@@ -83,7 +88,7 @@ namespace Kursovaya
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();// адаптер данных
 
-            MySqlCommand command = new MySqlCommand("SELECT student.FIO, student.DateOfBirth, personaldata.Series, personaldata.Number, personaldata.WhoAndWhen, personaldata.Adress FROM student JOIN personaldata ON student.PersonalDataId = personaldata.PersonalDataId WHERE StudentId = (SELECT StudentId FROM contract WHERE ContractId = @contractId);", db.GetConnection());// запрос
+            MySqlCommand command = new MySqlCommand("SELECT student.FIO, student.DateOfBirth, personaldata.Series, personaldata.Number, personaldata.WhoAndWhen, personaldata.Adress, groups.Cipher FROM student JOIN personaldata ON student.PersonalDataId = personaldata.PersonalDataId JOIN groups ON student.GroupId = groups.GroupId WHERE StudentId = (SELECT StudentId FROM contract WHERE ContractId = @contractId);", db.GetConnection());// запрос
 
             command.Parameters.Add("@contractId", MySqlDbType.VarChar).Value = requestBox.Text;
 
@@ -101,6 +106,7 @@ namespace Kursovaya
             number.Text= row["Number"].ToString();
             whoAndWhenTextBox.Text = row["WhoAndWhen"].ToString();
             adressBox.Text = row["Adress"].ToString();
+            cipher = row["Cipher"].ToString();
 
 
         }
@@ -115,7 +121,7 @@ namespace Kursovaya
 
             MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
 
-            MySqlCommand command = new MySqlCommand("SELECT CompanyName FROM company WHERE CompanyId = (SELECT CompanyId FROM vacancy WHERE VacancyId = (SELECT VacancyId FROM contract WHERE ContractId = @contractId));", db.GetConnection());
+            MySqlCommand command = new MySqlCommand("SELECT CompanyName, Email FROM company WHERE CompanyId = (SELECT CompanyId FROM vacancy WHERE VacancyId = (SELECT VacancyId FROM contract WHERE ContractId = @contractId));", db.GetConnection());
 
             command.Parameters.Add("@contractId", MySqlDbType.VarChar).Value = requestBox.Text;
 
@@ -125,6 +131,8 @@ namespace Kursovaya
 
             DataRow row = table.Rows[0];
                 companiesBox.Text=row[0].ToString();
+                companyEmail = row[1].ToString();
+                
 
         }
 
@@ -166,6 +174,7 @@ namespace Kursovaya
                 {"$series",series.Text },
                 {"$number",number.Text },
                 {"$whoAndWhen",whoAndWhenTextBox.Text },
+                {"$cipher",cipher },
                 {"$studentAdress",adressBox.Text},
                 {"$companyAdress",companyAdress},
                 {"$INN",INN},
@@ -173,6 +182,7 @@ namespace Kursovaya
                 {"$BIK",BIK},
                 {"$ORGN",ORGN},
                 {"$OKTMO",OKTMO},
+                {"$kazhSchet",KaznSchet},
                 {"$initials", surnameBox.Text+' '+nameBox.Text.Substring(0,1)+'.'+secondSurnameBox.Text.Substring(0,1)+'.'}
 
             };
@@ -206,7 +216,7 @@ namespace Kursovaya
                         Format: false,
                         ReplaceWith: missing, Replace: replace);
                 }
-                Object newFileName = Path.Combine(fileInfo.DirectoryName, fileInfo.DirectoryName, nameBox.Text + '_' + surnameBox.Text +'_'+DateTime.Now.ToString("yyyyMMdd")+ ".docx");
+                Object newFileName = Path.Combine(fileInfo.DirectoryName,surnameBox.Text + '_' + nameBox.Text +'_'+DateTime.Now.ToString("yyyyMMdd")+ ".docx");
                 app.ActiveDocument.SaveAs2(newFileName);
                 app.ActiveDocument.Close();
                 app.Quit();
@@ -217,24 +227,25 @@ namespace Kursovaya
                 Console.Write(ex.Message);
             }
 
+            SendEmailAsync(Path.Combine(fileInfo.DirectoryName, surnameBox.Text + '_' + nameBox.Text + '_' + DateTime.Now.ToString("yyyyMMdd") + ".docx"), companyEmail,companiesBox.Text).GetAwaiter();
 
-           /* DB db = new DB();
+
+            DB db = new DB();
 
             DataTable table = new DataTable();// таблица с данными
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();// адаптер данных
 
-            MySqlCommand command = new MySqlCommand("INSERT INTO `personaldata` (`Series`, `Number`, `WhoAndWhen`,`Adress`) VALUES (@series, @number, @whoAndWhen, @adress);" +
-                    "SELECT @@identity;" +
-                    "UPDATE `student` SET `PersonalDataId`=@@identity WHERE `AccountId`=@accountId", db.GetConnection());// запрос
+            MySqlCommand command = new MySqlCommand("UPDATE `contract` SET `Status`=@status,`File`=@file,`DateOfForming`=@date WHERE `ContractId`=@contractId", db.GetConnection());// запрос
 
-            var seriesAndNum = series.Text.Split(' ');
+            byte[] rawData = File.ReadAllBytes(Path.Combine(fileInfo.DirectoryName, surnameBox.Text + '_' + nameBox.Text + '_' + DateTime.Now.ToString("yyyyMMdd") + ".docx").ToString());
 
-            command.Parameters.Add("@series", MySqlDbType.VarChar).Value = seriesAndNum[0];
-            command.Parameters.Add("@number", MySqlDbType.VarChar).Value = seriesAndNum[1];
-            command.Parameters.Add("@whoAndWhen", MySqlDbType.VarChar).Value = whoAndWhenTextBox.Text;
-            command.Parameters.Add("@adress", MySqlDbType.VarChar).Value = adressBox.Text;
-            command.Parameters.Add("@accountId", MySqlDbType.VarChar).Value = id;
+
+            command.Parameters.Add("@contractId", MySqlDbType.VarChar).Value = requestBox.Text;
+            command.Parameters.Add("@status", MySqlDbType.VarChar).Value = "Запрос отправлен".ToString();
+            command.Parameters.Add("@file", MySqlDbType.Blob, rawData.Length).Value = rawData;
+            command.Parameters.Add("@date", MySqlDbType.VarChar).Value = DateTime.Now.ToString("yyyy-MM-dd");
+
 
             db.openConnection();// открываем подключение к БД
 
@@ -245,10 +256,9 @@ namespace Kursovaya
             }
             else
                 MessageBox.Show("Ошибка формирования договора");
-            db.closeConnection();*/
+            db.closeConnection();
 
 
-            SendEmailAsync(Path.Combine(fileInfo.DirectoryName, nameBox.Text + '_' + surnameBox.Text + '_' + DateTime.Now.ToString("yyyyMMdd") + ".docx")).GetAwaiter();
 
 
         }
@@ -265,6 +275,7 @@ namespace Kursovaya
                 {"$series",series.Text },
                 {"$number",number.Text },
                 {"$whoAndWhen",whoAndWhenTextBox.Text },
+                {"$cipher",cipher },
                 {"$companyAdress",companyAdress},
                 {"$studentAdress",adressBox.Text},
                 {"$INN",INN},
@@ -272,6 +283,7 @@ namespace Kursovaya
                 {"$BIK",BIK},
                 {"$ORGN",ORGN},
                 {"$OKTMO",OKTMO},
+                {"$kazhSchet",KaznSchet},
                 {"$initials",surnameBox.Text+' '+nameBox.Text.Substring(0,1)+'.'+secondSurnameBox.Text.Substring(0,1)+'.'}
 
 
@@ -307,7 +319,7 @@ namespace Kursovaya
                         Format: false,
                         ReplaceWith: missing,Replace: replace);
                 }
-                Object newFileName = Path.Combine(fileInfo.DirectoryName, nameBox.Text + '_' + surnameBox.Text + '_' + DateTime.Now.ToString("yyyyMMdd") + ".docx");
+                Object newFileName = Path.Combine(fileInfo.DirectoryName, surnameBox.Text + '_' + nameBox.Text + '_' + DateTime.Now.ToString("yyyyMMdd") + ".docx");
 
                 //app.ActiveDocument.SaveAs2(newFileName);
                 //app.ActiveDocument.Close();
@@ -329,19 +341,20 @@ namespace Kursovaya
 
         }
 
-        private static async Task SendEmailAsync(Object path)
-        {
+        private static async Task SendEmailAsync(Object path, String companyEmail, String companyName)
+        { 
             MailAddress from = new MailAddress("andrej.kozhan00@mail.ru", "Andrey");
-            MailAddress to = new MailAddress("kozhan.andrej@mail.ru");
+            MailAddress to = new MailAddress(companyEmail);
             MailMessage m = new MailMessage(from, to);
-            m.Subject = "Письмо на почту предприятия";
-            m.Body = "Примерное";
+            m.Subject = "Ученический договор студента";
+            m.Body = $"Добрый день, уважаемые {companyName}! Прикрепляем ученический договор студента для рассмотрения Вами." +
+                $"В случае заинтересованности просьба прислать ответное письмо на этот адрес.";
             m.Attachments.Add(new Attachment(path.ToString()));
             SmtpClient smtp = new SmtpClient("smtp.mail.ru", 587);
             smtp.Credentials = new NetworkCredential("andrej.kozhan00@mail.ru", "HAGYJWiuccGUX2BLnmth");
             smtp.EnableSsl = true;
             await smtp.SendMailAsync(m);
-            MessageBox.Show($"Письмо отправлено ({m.Subject})");
+            //MessageBox.Show($"Письмо отправлено ({m.Subject})");
         }
 
         public void GetInfoAboutCompany()
@@ -354,7 +367,7 @@ namespace Kursovaya
 
             MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
 
-            MySqlCommand command = new MySqlCommand("SELECT Adress,INN,KPP,BIK,ORGN,OKTMO FROM company WHERE CompanyName = @companyName", db.GetConnection());
+            MySqlCommand command = new MySqlCommand("SELECT Adress,INN,KPP,BIK,ORGN,OKTMO,KaznSchet FROM company WHERE CompanyName = @companyName", db.GetConnection());
 
             command.Parameters.Add("@companyName", MySqlDbType.VarChar).Value = companiesBox.Text;
 
@@ -369,11 +382,27 @@ namespace Kursovaya
             BIK = row[3].ToString();
             ORGN = row[4].ToString();
             OKTMO = row[5].ToString();
+            KaznSchet = row[6].ToString();
 
         }
 
         private void reloadButton_Click(object sender, EventArgs e)
         {
+            nameBox.Text = "";
+            surnameBox.Text = "";
+            secondSurnameBox.Text = "";
+            dateOfBirth.Text = "";
+            series.Text = "";
+            number.Text = "";
+            whoAndWhenTextBox.Text = "";
+            adressBox.Text = "";
+            requestBox.Text = "";
+            companiesBox.Text = "";
+            vacanciesBox.Text = "";
+            requerementsBox.Text = "";
+            competenciesBox.Text = "";
+
+
             MySqlConnection connection = new MySqlConnection("server=localhost;port=3307;user=root;password=root;database=student_contract");
             try
             {
