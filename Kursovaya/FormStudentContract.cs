@@ -33,38 +33,7 @@ namespace Kursovaya
             InitializeComponent();
             id = accountId;
 
-            MySqlConnection connection = new MySqlConnection("server=91.211.52.148;port=3356;user=developer;password=SgmZ9mZ2LcVEJS8w;database=db_develop");
-            try
-            {
-                connection.Open();
-                MySqlDataAdapter SDA = new MySqlDataAdapter("SELECT contract.ContractId, student.FIO, student.DateOfBirth, vacancy.VacancyId, vacancy.VacancyName, contract.DateOfRequest, contract.Status FROM contract JOIN student ON contract.StudentId = student.StudentId join vacancy on contract.VacancyId = vacancy.VacancyId WHERE contract.Status = 'Запрос сформирован';", connection);
-                DataTable DATA = new DataTable();
-                SDA.Fill(DATA);
-                requests.DataSource = DATA;
-                connection.Close();
-
-                foreach (DataGridViewRow row in requests.SelectedRows)
-                {
-                    if (!row.IsNewRow)
-                        requests.Rows.Remove(row);
-                    
-                }
-                foreach (DataRow row in DATA.Rows)
-                {
-                    requestBox.Items.Add(row[0].ToString());
-                    
-                    
-                }
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                connection.Close();
-            }
+            ReloadTable();
 
         }
 
@@ -259,6 +228,7 @@ namespace Kursovaya
             db.closeConnection();
 
 
+            ReloadTable();
 
 
         }
@@ -387,6 +357,11 @@ namespace Kursovaya
         }
 
         private void reloadButton_Click(object sender, EventArgs e)
+        {
+            ReloadTable();
+        }
+
+        private void ReloadTable()
         {
             nameBox.Text = "";
             surnameBox.Text = "";

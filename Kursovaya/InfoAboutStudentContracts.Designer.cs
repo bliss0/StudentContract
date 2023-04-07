@@ -35,6 +35,8 @@
             this.dateTo = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.dateFromBox = new System.Windows.Forms.DateTimePicker();
+            this.getExcel = new System.Windows.Forms.Button();
+            this.createDiagram = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.requests)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,11 +101,31 @@
             this.dateFromBox.Size = new System.Drawing.Size(200, 22);
             this.dateFromBox.TabIndex = 33;
             // 
+            // getExcel
+            // 
+            this.getExcel.Location = new System.Drawing.Point(567, 509);
+            this.getExcel.Name = "getExcel";
+            this.getExcel.Size = new System.Drawing.Size(180, 50);
+            this.getExcel.TabIndex = 34;
+            this.getExcel.Text = "Получить excel файл";
+            this.getExcel.UseVisualStyleBackColor = true;
+            // 
+            // createDiagram
+            // 
+            this.createDiagram.Location = new System.Drawing.Point(806, 509);
+            this.createDiagram.Name = "createDiagram";
+            this.createDiagram.Size = new System.Drawing.Size(191, 50);
+            this.createDiagram.TabIndex = 35;
+            this.createDiagram.Text = "Построить диаграмму";
+            this.createDiagram.UseVisualStyleBackColor = true;
+            // 
             // InfoAboutStudentContracts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1147, 618);
+            this.Controls.Add(this.createDiagram);
+            this.Controls.Add(this.getExcel);
             this.Controls.Add(this.dateFromBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dateTo);
@@ -128,5 +150,7 @@
         private System.Windows.Forms.DateTimePicker dateTo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DateTimePicker dateFromBox;
+        private System.Windows.Forms.Button getExcel;
+        private System.Windows.Forms.Button createDiagram;
     }
 }
