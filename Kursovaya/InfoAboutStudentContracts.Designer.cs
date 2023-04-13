@@ -103,7 +103,7 @@
             // 
             // getExcel
             // 
-            this.getExcel.Location = new System.Drawing.Point(567, 509);
+            this.getExcel.Location = new System.Drawing.Point(689, 539);
             this.getExcel.Name = "getExcel";
             this.getExcel.Size = new System.Drawing.Size(180, 50);
             this.getExcel.TabIndex = 34;
@@ -112,7 +112,7 @@
             // 
             // createDiagram
             // 
-            this.createDiagram.Location = new System.Drawing.Point(806, 509);
+            this.createDiagram.Location = new System.Drawing.Point(918, 539);
             this.createDiagram.Name = "createDiagram";
             this.createDiagram.Size = new System.Drawing.Size(191, 50);
             this.createDiagram.TabIndex = 35;
