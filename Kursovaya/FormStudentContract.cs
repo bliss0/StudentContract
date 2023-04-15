@@ -132,8 +132,7 @@ namespace Kursovaya
 
         private void formContractButton_Click(object sender, EventArgs e)
         {
-
-            FileInfo fileInfo = new FileInfo("example.docx");
+            FileInfo fileInfo = new FileInfo(@"example.docx");
 
             string path = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+ @"\Ученические_договоры\";
 
@@ -401,7 +400,7 @@ namespace Kursovaya
             try
             {
                 connection.Open();
-                MySqlDataAdapter SDA = new MySqlDataAdapter("SELECT contract.ContractId, student.FIO, student.DateOfBirth, vacancy.VacancyId, vacancy.VacancyName, contract.DateOfRequest, contract.Status FROM contract JOIN student ON contract.StudentId = student.StudentId join vacancy on contract.VacancyId = vacancy.VacancyId WHERE contract.Status = 'Запрос сформирован';", connection);
+                MySqlDataAdapter SDA = new MySqlDataAdapter("SELECT contract.ContractId, student.FIO, student.DateOfBirth, vacancy.VacancyId, vacancy.VacancyName, contract.DateOfRequest, contract.Status FROM contract JOIN student ON contract.StudentId = student.StudentId join vacancy on contract.VacancyId = vacancy.VacancyId WHERE contract.Status = 'Запрос сформирован'  ORDER BY contract.ContractId ASC;", connection);
                 DataTable DATA = new DataTable();
                 SDA.Fill(DATA);
                 requests.DataSource = DATA;

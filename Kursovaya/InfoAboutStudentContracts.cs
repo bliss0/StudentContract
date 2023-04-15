@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace Kursovaya
 {
     public partial class InfoAboutStudentContracts : Form
     {
+        private List<String> FIO = new List<string>();
+        private List<String> dateOfForming = new List<string>();
         public InfoAboutStudentContracts()
         {
             InitializeComponent();
@@ -38,8 +41,15 @@ namespace Kursovaya
                 {
                     if (!row.IsNewRow)
                         requests.Rows.Remove(row);
+                        
 
                 }
+                foreach (DataRow row in DATA.Rows) {
+                    FIO.Add(row[1].ToString());
+                    dateOfForming.Add(row[5].ToString());
+
+                }
+
             }
             catch (Exception ex)
             {
@@ -58,6 +68,48 @@ namespace Kursovaya
             var dateForming = date.ToString().Substring(0, 10).Split('.');
             return dateForming[2] + '-' + dateForming[1] + '-' + dateForming[0];
         }
+
+        private void getExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string path = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Ученические_договоры\";
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                using (Kursovaya.ExcelHelper helper = new Kursovaya.ExcelHelper())
+                {
+                    if (helper.Open(filePath: Path.Combine(path,"Выгрузка 1.xlsx")))
+                        {
+                        for (int i = 0; i < FIO.Count+1; i++)
+                        {
+                            helper.Set(column: "A", row: i, data: FIO[i]);
+                            helper.Set(column: "B", row: i, data: dateOfForming[i]);
+
+                        }
+                        helper.Save();
+                        }
+
+                }
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+        }
+
+        private void createDiagram_Click(object sender, EventArgs e)
+        {
+            GetAnalyse getAnalyse = new GetAnalyse(dateOfForming);
+            getAnalyse.Show();
+        }
+
+        private void InfoAboutStudentContracts_Load(object sender, EventArgs e)
+        {
+
+        }
     }
+    
     
 }

@@ -109,6 +109,7 @@
             this.getExcel.TabIndex = 34;
             this.getExcel.Text = "Получить excel файл";
             this.getExcel.UseVisualStyleBackColor = true;
+            this.getExcel.Click += new System.EventHandler(this.getExcel_Click);
             // 
             // createDiagram
             // 
@@ -118,6 +119,7 @@
             this.createDiagram.TabIndex = 35;
             this.createDiagram.Text = "Построить диаграмму";
             this.createDiagram.UseVisualStyleBackColor = true;
+            this.createDiagram.Click += new System.EventHandler(this.createDiagram_Click);
             // 
             // InfoAboutStudentContracts
             // 
@@ -135,6 +137,7 @@
             this.Controls.Add(this.requests);
             this.Name = "InfoAboutStudentContracts";
             this.Text = "InfoAboutStudentContracts";
+            this.Load += new System.EventHandler(this.InfoAboutStudentContracts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.requests)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
