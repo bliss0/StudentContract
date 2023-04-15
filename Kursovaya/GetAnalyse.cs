@@ -15,9 +15,22 @@ namespace Kursovaya
         public GetAnalyse(List<String> dates)
         {
             InitializeComponent();
+            List<String> contractsFor2023 = new List<String>();
+            List<String> contractsFor2024 = new List<String>();
+
             if (dates.Count > 0)
-            {
-                diagramBox.Series[0].Points.AddXY(1, Convert.ToDouble(dates.Count)) ;
+            {   for (int i = 0; i < dates.Count; i++)
+                { 
+                    if (dates[i].Contains("2023"))
+                    {
+                       contractsFor2023.Add(dates[i]);
+
+                    }else contractsFor2024.Add(dates[i]);
+                    
+
+                }
+                diagramBox.Series[0].Points.AddXY("2023", Convert.ToDouble(contractsFor2023.Count));
+                diagramBox.Series[0].Points.AddXY("2024", Convert.ToDouble(contractsFor2024.Count));
             }
 
 

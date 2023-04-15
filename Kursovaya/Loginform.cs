@@ -41,23 +41,22 @@ namespace Kursovaya
             
             MySqlDataAdapter adapter = new MySqlDataAdapter();// адаптер
 
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `accounts` WHERE `Login` = @uL AND `Password`=@uP", db.GetConnection());// запрос
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `accounts` WHERE `Login` = @uL AND `Password`=@uP AND `isAdmin`=@isAdmin", db.GetConnection());// запрос
 
             command.Parameters.Add("@uL", MySqlDbType.VarChar).Value = loginuser;// определение маски
             command.Parameters.Add("@uP", MySqlDbType.VarChar).Value = passuser;// определение маски
+            command.Parameters.Add("@isAdmin", MySqlDbType.VarChar).Value = "1";// определение маски
 
             adapter.SelectCommand = command;// выдаем запрос адаптеру
             adapter.Fill(table);// заполняем таблицу
             if (table.Rows.Count > 0)// если в таблицу хоть 1 столбец, то мы вошли правильно
             {             
                 this.Hide();
-                DataRow row = table.Rows[0];
-                String accountId = row["AccountId"].ToString();
-                MainForm mainForm = new MainForm(accountId);
+                MainForm mainForm = new MainForm();
                 mainForm.Show();
             }
             else
-                MessageBox.Show("Ошибка входа!!!!");
+                MessageBox.Show("Ошибка входа!");
         }
 
          Point lastpoint;// точка отвечающая за ластпоинт

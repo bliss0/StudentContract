@@ -15,11 +15,9 @@ namespace Kursovaya
 {
     public partial class MainForm : Form
     {
-        String accountId;
-        public MainForm(String accountId)
+        public MainForm()
         {
             InitializeComponent();
-            this.accountId = accountId;
 
         }
 
@@ -54,7 +52,7 @@ namespace Kursovaya
 
         private void formContract_Click(object sender, EventArgs e)
         {
-            FormStudentContract formStudentContract = new FormStudentContract(accountId);
+            FormStudentContract formStudentContract = new FormStudentContract();
             formStudentContract.Show();
         }
 

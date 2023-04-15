@@ -30,7 +30,7 @@ namespace Kursovaya
             {
               
                 connection.Open();
-                MySqlDataAdapter SDA = new MySqlDataAdapter($"SELECT contract.ContractId, student.FIO, student.DateOfBirth, vacancy.VacancyId, vacancy.VacancyName, contract.DateOfForming, contract.Status FROM contract JOIN student ON contract.StudentId = student.StudentId join vacancy on contract.VacancyId = vacancy.VacancyId WHERE contract.Status = 'Запрос отправлен' AND DATE(contract.DateOfForming) >= '{GetDate(dateFromBox.Value)}' AND DATE(contract.DateOfForming) <= '{GetDate(dateTo.Value)}';", connection);
+                MySqlDataAdapter SDA = new MySqlDataAdapter($"SELECT contract.ContractId, student.FIO, student.DateOfBirth, vacancy.VacancyId, vacancy.VacancyName, contract.DateOfForming, contract.Status FROM contract JOIN student ON contract.StudentId = student.StudentId join vacancy on contract.VacancyId = vacancy.VacancyId WHERE contract.Status = 'Запрос отправлен' AND DATE(contract.DateOfForming) >= '{GetDate(dateFromBox.Value)}' AND DATE(contract.DateOfForming) <= '{GetDate(dateTo.Value)}' ORDER BY contract.ContractId ASC;", connection);
 
                 DataTable DATA = new DataTable();
                 SDA.Fill(DATA);
@@ -82,14 +82,15 @@ namespace Kursovaya
 
                 using (Kursovaya.ExcelHelper helper = new Kursovaya.ExcelHelper())
                 {
-                    if (helper.Open(filePath: Path.Combine(path,"Выгрузка 1.xlsx")))
+                    if (helper.Open(filePath: Path.Combine(path, "Выгрузка"+DateTime.Now.ToString("yyyy_MM_dd_HH_mm")+".xlsx")))
                         {
-                        for (int i = 0; i < FIO.Count+1; i++)
-                        {
-                            helper.Set(column: "A", row: i, data: FIO[i]);
-                            helper.Set(column: "B", row: i, data: dateOfForming[i]);
+                         for (int i = 0; i < FIO.Count; i++)
+                         {
+                        helper.Set(column: "A", row: i+1, data: FIO[i]);
+                        helper.Set(column: "B", row: i+1, data: dateOfForming[i]);
 
                         }
+                        MessageBox.Show("Файл успешно сформирован и сохранен по пути: " +path);
                         helper.Save();
                         }
 

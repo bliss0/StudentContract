@@ -18,19 +18,25 @@ namespace Kursovaya
         public RegisterForm()
         {
             InitializeComponent();
-          
+
         }
 
-      
+
         private void close_Click(object sender, EventArgs e)// кнопка закрытия 
         {
             Application.Exit();
         }
 
-       
+
 
         private void buttonregister_Click(object sender, EventArgs e)// регистрация
         {
+            if (tokenBox.Text != "7fgdjas9123j0213jads912h8sasd")
+            {
+                MessageBox.Show("Неверный токен администратора!");
+                return;
+            }
+
             Regex nameCheck = new Regex(".*[А-яЁёA-z].*");// условия для ввода корректного имени 
             Match match = nameCheck.Match(userNameField.Text);// проверка на совпадение имени
             if (!match.Success)
@@ -47,43 +53,37 @@ namespace Kursovaya
                 return;
             }
 
-            
-            if(isUserExist())// проверка на существование пользователя
+
+
+            if (isUserExist())// проверка на существование пользователя
                 return;
 
-            if (isStudentExist())
+            DB db = new DB();// подключение к БД
+            MySqlCommand command = new MySqlCommand("INSERT INTO `accounts` (`Login`, `Password`, `Name`, `Surname`,`isAdmin`) VALUES (@login,@pass, @name, @surname, @isAdmin);", db.GetConnection());// запрос в БД
+
+            //запись значений из полей в формах в БД
+            command.Parameters.Add("@login", MySqlDbType.VarChar).Value = loginField.Text;
+            command.Parameters.Add("@pass", MySqlDbType.VarChar).Value = passwordFiend.Text;
+            command.Parameters.Add("@name", MySqlDbType.VarChar).Value = userNameField.Text;
+            command.Parameters.Add("@surname", MySqlDbType.VarChar).Value = userSurnameField.Text;
+            command.Parameters.Add("@isAdmin", MySqlDbType.VarChar).Value = "1";
+
+            db.openConnection();// открываем подключение к БД
+
+            if (command.ExecuteNonQuery() != 0)
             {
 
-                DB db = new DB();// подключение к БД
-                MySqlCommand command = new MySqlCommand("INSERT INTO `accounts` (`Login`, `Password`, `Name`, `Surname`,`DateOfBirth`) VALUES (@login,@pass, @name, @surname, @dateOfBirth);" +
-                    "SELECT @@identity;" +
-                    "UPDATE `student` SET `AccountId`=@@identity WHERE `StudentId`=@studentId", db.GetConnection());// запрос в БД
+                // проверка выполнения запроса
 
-                //запись значений из полей в формах в БД
-                command.Parameters.Add("@login", MySqlDbType.VarChar).Value = loginField.Text;
-                command.Parameters.Add("@pass", MySqlDbType.VarChar).Value = passwordFiend.Text;
-                command.Parameters.Add("@name", MySqlDbType.VarChar).Value = userNameField.Text;
-                command.Parameters.Add("@surname", MySqlDbType.VarChar).Value = userSurnameField.Text;
-                command.Parameters.Add("@dateOfBirth", MySqlDbType.VarChar).Value = dateOfBitrhForm.Text;
-                command.Parameters.Add("@studentId", MySqlDbType.VarChar).Value = studentId;
+                MessageBox.Show("Аккаунт был создан");
 
-                db.openConnection();// открываем подключение к БД
-
-                if (command.ExecuteNonQuery()!=0)
-                {
-
-                    // проверка выполнения запроса
-
-                    MessageBox.Show("Аккаунт был создан");
-
-                }                  
-                else
-                    MessageBox.Show("Аккаунт не был создан");
-                db.closeConnection();
             }
-            else MessageBox.Show("Такого студента не существует");
-        
+            else
+                MessageBox.Show("Аккаунт не был создан");
+            db.closeConnection();
         }
+            
+
 
         public Boolean isUserExist()// существование пользователя
             {
@@ -112,33 +112,6 @@ namespace Kursovaya
             
         }
 
-        public Boolean isStudentExist()
-        {
-            DB db = new DB();
-
-            DataTable table = new DataTable();// таблица с данными
-
-            MySqlDataAdapter adapter = new MySqlDataAdapter();// адаптер данных
-
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `student` WHERE `FIO` LIKE @fio AND `DateOfBirth` LIKE @dateOfBirth", db.GetConnection());// запрос
-
-            command.Parameters.Add("@fio", MySqlDbType.VarChar).Value = userSurnameField.Text+' '+userNameField.Text+'%';
-            command.Parameters.Add("@dateOfBirth", MySqlDbType.VarChar).Value = dateOfBitrhForm.Text;
-
-            adapter.SelectCommand = command;// установка адаптера на новый запрос
-            adapter.Fill(table);// заполнение таблицы
-
-            if (table.Rows.Count > 0)// проверка выполнения запроса
-            {
-                DataRow row = table.Rows[0];
-                studentId = row["StudentId"].ToString();
-
-                return true;
-            }
-            else
-
-                return false;
-        }
 
 
         Point lastpoint;
