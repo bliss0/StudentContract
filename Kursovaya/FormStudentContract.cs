@@ -135,6 +135,14 @@ namespace Kursovaya
 
             FileInfo fileInfo = new FileInfo("example.docx");
 
+            string path = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+ @"\Ученические_договоры\";
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+
             var items = new Dictionary<string, string>
             {
                 {"$companyName", companiesBox.Text},
@@ -185,7 +193,7 @@ namespace Kursovaya
                         Format: false,
                         ReplaceWith: missing, Replace: replace);
                 }
-                Object newFileName = Path.Combine(fileInfo.DirectoryName,surnameBox.Text + '_' + nameBox.Text +'_'+DateTime.Now.ToString("yyyyMMdd")+ ".docx");
+                Object newFileName = Path.Combine(path, surnameBox.Text + '_' + nameBox.Text +'_'+DateTime.Now.ToString("yyyyMMdd")+ ".docx");
                 app.ActiveDocument.SaveAs2(newFileName);
                 app.ActiveDocument.Close();
                 app.Quit();
@@ -196,46 +204,57 @@ namespace Kursovaya
                 Console.Write(ex.Message);
             }
 
-            SendEmailAsync(Path.Combine(fileInfo.DirectoryName, surnameBox.Text + '_' + nameBox.Text + '_' + DateTime.Now.ToString("yyyyMMdd") + ".docx"), companyEmail,companiesBox.Text).GetAwaiter();
-
-
-            DB db = new DB();
-
-            DataTable table = new DataTable();// таблица с данными
-
-            MySqlDataAdapter adapter = new MySqlDataAdapter();// адаптер данных
-
-            MySqlCommand command = new MySqlCommand("UPDATE `contract` SET `Status`=@status,`File`=@file,`DateOfForming`=@date WHERE `ContractId`=@contractId", db.GetConnection());// запрос
-
-            byte[] rawData = File.ReadAllBytes(Path.Combine(fileInfo.DirectoryName, surnameBox.Text + '_' + nameBox.Text + '_' + DateTime.Now.ToString("yyyyMMdd") + ".docx").ToString());
-
-
-            command.Parameters.Add("@contractId", MySqlDbType.VarChar).Value = requestBox.Text;
-            command.Parameters.Add("@status", MySqlDbType.VarChar).Value = "Запрос отправлен".ToString();
-            command.Parameters.Add("@file", MySqlDbType.Blob, rawData.Length).Value = rawData;
-            command.Parameters.Add("@date", MySqlDbType.VarChar).Value = DateTime.Now.ToString("yyyy-MM-dd");
-
-
-            db.openConnection();// открываем подключение к БД
-
-            if (command.ExecuteNonQuery() != 0)
+            try
             {
-                MessageBox.Show("Договор был сформирован и отправлен на почту предприятия");
+                SendEmailAsync(Path.Combine(path, surnameBox.Text + '_' + nameBox.Text + '_' + DateTime.Now.ToString("yyyyMMdd") + ".docx"), companyEmail, companiesBox.Text).GetAwaiter();
 
+
+                DB db = new DB();
+
+                DataTable table = new DataTable();// таблица с данными
+
+                MySqlDataAdapter adapter = new MySqlDataAdapter();// адаптер данных
+
+                MySqlCommand command = new MySqlCommand("UPDATE `contract` SET `Status`=@status,`File`=@file,`DateOfForming`=@date WHERE `ContractId`=@contractId", db.GetConnection());// запрос
+
+                byte[] rawData = File.ReadAllBytes(Path.Combine(path, surnameBox.Text + '_' + nameBox.Text + '_' + DateTime.Now.ToString("yyyyMMdd") + ".docx").ToString());
+
+
+                command.Parameters.Add("@contractId", MySqlDbType.VarChar).Value = requestBox.Text;
+                command.Parameters.Add("@status", MySqlDbType.VarChar).Value = "Запрос отправлен".ToString();
+                command.Parameters.Add("@file", MySqlDbType.Blob, rawData.Length).Value = rawData;
+                command.Parameters.Add("@date", MySqlDbType.VarChar).Value = DateTime.Now.ToString("yyyy-MM-dd");
+
+
+                db.openConnection();// открываем подключение к БД
+
+                if (command.ExecuteNonQuery() != 0)
+                {
+                    MessageBox.Show("Договор был сформирован и отправлен на почту предприятия");
+
+                }
+                else
+                    MessageBox.Show("Ошибка формирования договора");
+                db.closeConnection();
+
+
+                ReloadTable();
             }
-            else
-                MessageBox.Show("Ошибка формирования договора");
-            db.closeConnection();
-
-
-            ReloadTable();
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally { }
 
         }
 
         private void preViewButton_Click(object sender, EventArgs e)
         {
+
             FileInfo fileInfo = new FileInfo("example.docx");
+
+            string path = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
 
             var items = new Dictionary<string, string>
             {
@@ -289,7 +308,7 @@ namespace Kursovaya
                         Format: false,
                         ReplaceWith: missing,Replace: replace);
                 }
-                Object newFileName = Path.Combine(fileInfo.DirectoryName, surnameBox.Text + '_' + nameBox.Text + '_' + DateTime.Now.ToString("yyyyMMdd") + ".docx");
+                //Object newFileName = Path.Combine(path, surnameBox.Text + '_' + nameBox.Text + '_' + DateTime.Now.ToString("yyyyMMdd") + ".docx");
 
                 //app.ActiveDocument.SaveAs2(newFileName);
                 //app.ActiveDocument.Close();
@@ -412,6 +431,11 @@ namespace Kursovaya
             {
                 connection.Close();
             }
+        }
+
+        private void FormStudentContract_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
