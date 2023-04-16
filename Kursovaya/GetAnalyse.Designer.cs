@@ -57,11 +57,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(190, 9);
+            this.label1.Location = new System.Drawing.Point(65, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(414, 16);
+            this.label1.Size = new System.Drawing.Size(657, 16);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Статискика количества заключенных ученических договоров";
+            this.label1.Text = "Статискика количества заключенных ученических договоров за выбранный период в 202" +
+    "3 и 2024 г.";
             // 
             // GetAnalyse
             // 

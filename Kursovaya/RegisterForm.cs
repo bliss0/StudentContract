@@ -14,7 +14,6 @@ namespace Kursovaya
 {
     public partial class RegisterForm : Form
     {
-        String studentId;
         public RegisterForm()
         {
             InitializeComponent();

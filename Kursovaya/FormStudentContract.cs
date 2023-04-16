@@ -130,7 +130,7 @@ namespace Kursovaya
 
         private void formContractButton_Click(object sender, EventArgs e)
         {
-            FileInfo fileInfo = new FileInfo(@"example.docx");
+            FileInfo fileInfo = new FileInfo("example.docx");
 
             string path = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+ @"\Ученические_договоры\";
 
@@ -248,7 +248,7 @@ namespace Kursovaya
         private void preViewButton_Click(object sender, EventArgs e)
         {
 
-            FileInfo fileInfo = new FileInfo(@"example.docx");
+            FileInfo fileInfo = new FileInfo("example.docx");
 
             var items = new Dictionary<string, string>
             {
