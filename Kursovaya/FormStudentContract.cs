@@ -130,7 +130,7 @@ namespace Kursovaya
 
         private void formContractButton_Click(object sender, EventArgs e)
         {
-            FileInfo fileInfo = new FileInfo("example.docx");
+            FileInfo fileInfo = new FileInfo(System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\example.docx");
 
             string path = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+ @"\Ученические_договоры\";
 
@@ -248,7 +248,7 @@ namespace Kursovaya
         private void preViewButton_Click(object sender, EventArgs e)
         {
 
-            FileInfo fileInfo = new FileInfo("example.docx");
+            FileInfo fileInfo = new FileInfo(System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+@"\example.docx");
 
             var items = new Dictionary<string, string>
             {
@@ -302,9 +302,7 @@ namespace Kursovaya
                         Format: false,
                         ReplaceWith: missing,Replace: replace);
                 }
-                //Object newFileName = Path.Combine(path, surnameBox.Text + '_' + nameBox.Text + '_' + DateTime.Now.ToString("yyyyMMdd") + ".docx");
 
-                //app.ActiveDocument.SaveAs2(newFileName);
                 //app.ActiveDocument.Close();
                 //app.Quit();
             }
