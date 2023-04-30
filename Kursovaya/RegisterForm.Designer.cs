@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.userSurnameField = new System.Windows.Forms.TextBox();
+            this.userNameField = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tokenBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.lalebLogin = new System.Windows.Forms.Label();
             this.buttonregister = new System.Windows.Forms.Button();
@@ -38,19 +44,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.close = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tokenBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.userNameField = new System.Windows.Forms.TextBox();
-            this.userSurnameField = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(139)))), ((int)(((byte)(206)))));
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.userSurnameField);
@@ -70,11 +70,79 @@
             this.panel1.Size = new System.Drawing.Size(455, 395);
             this.panel1.TabIndex = 1;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label6.Location = new System.Drawing.Point(50, 197);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(66, 16);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Фамилия";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label4.Location = new System.Drawing.Point(70, 170);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(33, 16);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Имя";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // userSurnameField
+            // 
+            this.userSurnameField.Location = new System.Drawing.Point(133, 194);
+            this.userSurnameField.Margin = new System.Windows.Forms.Padding(4);
+            this.userSurnameField.Multiline = true;
+            this.userSurnameField.Name = "userSurnameField";
+            this.userSurnameField.Size = new System.Drawing.Size(207, 24);
+            this.userSurnameField.TabIndex = 13;
+            this.userSurnameField.UseSystemPasswordChar = true;
+            // 
+            // userNameField
+            // 
+            this.userNameField.Location = new System.Drawing.Point(133, 162);
+            this.userNameField.Margin = new System.Windows.Forms.Padding(4);
+            this.userNameField.Multiline = true;
+            this.userNameField.Name = "userNameField";
+            this.userNameField.Size = new System.Drawing.Size(207, 24);
+            this.userNameField.TabIndex = 12;
+            this.userNameField.UseSystemPasswordChar = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label3.Location = new System.Drawing.Point(153, 236);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(160, 16);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Токен администратора";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // tokenBox
+            // 
+            this.tokenBox.Location = new System.Drawing.Point(133, 265);
+            this.tokenBox.Margin = new System.Windows.Forms.Padding(4);
+            this.tokenBox.Name = "tokenBox";
+            this.tokenBox.Size = new System.Drawing.Size(207, 22);
+            this.tokenBox.TabIndex = 10;
+            this.tokenBox.UseSystemPasswordChar = true;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label5.Location = new System.Drawing.Point(60, 138);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
@@ -87,7 +155,7 @@
             // 
             this.lalebLogin.AutoSize = true;
             this.lalebLogin.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.lalebLogin.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lalebLogin.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lalebLogin.Location = new System.Drawing.Point(70, 100);
             this.lalebLogin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lalebLogin.Name = "lalebLogin";
@@ -98,7 +166,7 @@
             // 
             // buttonregister
             // 
-            this.buttonregister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.buttonregister.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.buttonregister.FlatAppearance.BorderColor = System.Drawing.Color.DarkKhaki;
             this.buttonregister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonregister.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -171,6 +239,7 @@
             // 
             // label1
             // 
+            this.label1.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Monotype Corsiva", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
@@ -183,74 +252,6 @@
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.label1_MouseDown);
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove);
-            // 
-            // tokenBox
-            // 
-            this.tokenBox.Location = new System.Drawing.Point(133, 265);
-            this.tokenBox.Margin = new System.Windows.Forms.Padding(4);
-            this.tokenBox.Name = "tokenBox";
-            this.tokenBox.Size = new System.Drawing.Size(207, 22);
-            this.tokenBox.TabIndex = 10;
-            this.tokenBox.UseSystemPasswordChar = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(153, 236);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(160, 16);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Токен администратора";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // userNameField
-            // 
-            this.userNameField.Location = new System.Drawing.Point(133, 162);
-            this.userNameField.Margin = new System.Windows.Forms.Padding(4);
-            this.userNameField.Multiline = true;
-            this.userNameField.Name = "userNameField";
-            this.userNameField.Size = new System.Drawing.Size(207, 24);
-            this.userNameField.TabIndex = 12;
-            this.userNameField.UseSystemPasswordChar = true;
-            // 
-            // userSurnameField
-            // 
-            this.userSurnameField.Location = new System.Drawing.Point(133, 194);
-            this.userSurnameField.Margin = new System.Windows.Forms.Padding(4);
-            this.userSurnameField.Multiline = true;
-            this.userSurnameField.Name = "userSurnameField";
-            this.userSurnameField.Size = new System.Drawing.Size(207, 24);
-            this.userSurnameField.TabIndex = 13;
-            this.userSurnameField.UseSystemPasswordChar = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(70, 170);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(33, 16);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Имя";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label6.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label6.Location = new System.Drawing.Point(50, 197);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 16);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Фамилия";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // RegisterForm
             // 

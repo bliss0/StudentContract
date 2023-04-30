@@ -61,6 +61,11 @@ namespace Kursovaya
             InfoAboutStudentContracts infoAboutStudentContracts = new InfoAboutStudentContracts();
             infoAboutStudentContracts.Show();
         }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
     
     

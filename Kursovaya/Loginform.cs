@@ -56,7 +56,7 @@ namespace Kursovaya
                 mainForm.Show();
             }
             else
-                MessageBox.Show("Ошибка входа!");
+                MessageBox.Show("Введен неверный логин или пароль!");
         }
 
          Point lastpoint;// точка отвечающая за ластпоинт
