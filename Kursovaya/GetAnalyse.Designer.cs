@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.diagramBox = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label14 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.diagramBox)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -43,18 +44,19 @@
             // 
             // diagramBox
             // 
-            chartArea4.Name = "ChartArea1";
-            this.diagramBox.ChartAreas.Add(chartArea4);
+            chartArea2.Name = "ChartArea1";
+            this.diagramBox.ChartAreas.Add(chartArea2);
             this.diagramBox.IsSoftShadows = false;
-            legend4.Name = "Legend1";
-            this.diagramBox.Legends.Add(legend4);
+            legend2.Name = "Legend1";
+            this.diagramBox.Legends.Add(legend2);
             this.diagramBox.Location = new System.Drawing.Point(0, 123);
             this.diagramBox.Name = "diagramBox";
             this.diagramBox.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Кол-во заключенных ученических договоров";
-            this.diagramBox.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Legend = "Legend1";
+            series2.Name = "Кол-во заключенных ученических договоров";
+            this.diagramBox.Series.Add(series2);
             this.diagramBox.Size = new System.Drawing.Size(902, 460);
             this.diagramBox.TabIndex = 0;
             this.diagramBox.Text = "chart1";
@@ -67,23 +69,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(902, 123);
             this.panel1.TabIndex = 8;
-            // 
-            // label14
-            // 
-            this.label14.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Font = new System.Drawing.Font("Monotype Corsiva", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label14.ForeColor = System.Drawing.SystemColors.Control;
-            this.label14.Location = new System.Drawing.Point(0, 0);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(902, 123);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "Статискика количества заключенных ученических договоров за выбранный период в 202" +
-    "3 и 2024 г.";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label14.MouseDown += new System.Windows.Forms.MouseEventHandler(this.label14_MouseDown);
-            this.label14.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label14_MouseMove);
             // 
             // panel3
             // 
@@ -109,6 +94,32 @@
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // label14
+            // 
+            this.label14.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label14.Font = new System.Drawing.Font("Monotype Corsiva", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label14.ForeColor = System.Drawing.SystemColors.Control;
+            this.label14.Location = new System.Drawing.Point(0, 0);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(902, 123);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "Статискика количества заключенных ученических договоров за выбранный период в 202" +
+    "2-2024 гг.";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label14.MouseDown += new System.Windows.Forms.MouseEventHandler(this.label14_MouseDown);
+            this.label14.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label14_MouseMove);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(903, 30);
+            this.menuStrip1.TabIndex = 9;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
             // GetAnalyse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -116,7 +127,9 @@
             this.ClientSize = new System.Drawing.Size(903, 582);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.diagramBox);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "GetAnalyse";
             this.Text = "GetAnalyse";
             this.Load += new System.EventHandler(this.GetAnalyse_Load);
@@ -124,6 +137,7 @@
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -134,5 +148,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
     }
 }

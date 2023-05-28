@@ -54,7 +54,7 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(377, 358);
             this.panel1.TabIndex = 0;
@@ -63,7 +63,7 @@
             // 
             this.registrChange.AutoSize = true;
             this.registrChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.registrChange.ForeColor = System.Drawing.Color.White;
+            this.registrChange.ForeColor = System.Drawing.Color.Black;
             this.registrChange.Location = new System.Drawing.Point(107, 314);
             this.registrChange.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.registrChange.Name = "registrChange";
@@ -104,7 +104,7 @@
             this.buttonlogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonlogin.ForeColor = System.Drawing.Color.Black;
             this.buttonlogin.Location = new System.Drawing.Point(91, 245);
-            this.buttonlogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonlogin.Margin = new System.Windows.Forms.Padding(4);
             this.buttonlogin.Name = "buttonlogin";
             this.buttonlogin.Size = new System.Drawing.Size(207, 44);
             this.buttonlogin.TabIndex = 3;
@@ -115,7 +115,7 @@
             // passfiend
             // 
             this.passfiend.Location = new System.Drawing.Point(91, 180);
-            this.passfiend.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.passfiend.Margin = new System.Windows.Forms.Padding(4);
             this.passfiend.Name = "passfiend";
             this.passfiend.Size = new System.Drawing.Size(207, 22);
             this.passfiend.TabIndex = 2;
@@ -124,7 +124,7 @@
             // loginfield
             // 
             this.loginfield.Location = new System.Drawing.Point(91, 145);
-            this.loginfield.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.loginfield.Margin = new System.Windows.Forms.Padding(4);
             this.loginfield.Name = "loginfield";
             this.loginfield.Size = new System.Drawing.Size(207, 22);
             this.loginfield.TabIndex = 1;
@@ -136,7 +136,7 @@
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(377, 75);
             this.panel2.TabIndex = 0;
@@ -177,7 +177,7 @@
             this.ClientSize = new System.Drawing.Size(377, 358);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Loginform";
             this.Text = "Loginform";
             this.panel1.ResumeLayout(false);
